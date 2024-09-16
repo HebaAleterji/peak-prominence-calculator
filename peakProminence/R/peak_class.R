@@ -12,20 +12,15 @@ Peak <- function(positions, heights) {
 
 #' Print a Peak object
 #'
-#' This function prints the peak positions and heights stored in a Peak object.
-#'
 #' @param obj A Peak object.
 #' @export
 print.Peak <- function(obj) {
   cat("Detected Peaks\n")
-  cat("Positions:", obj$positions, "\n")
-  cat("Heights:", obj$heights, "\n")
+  cat("Positions:", paste(obj$positions, collapse = " "), "\n")
+  cat("Heights:", paste(obj$heights, collapse = " "), "\n")
 }
 
 #' Summary of a Peak object
-#'
-#' This function provides a summary of a Peak object, including the number of peaks,
-#' average peak height, and details about the positions and heights.
 #'
 #' @param obj A Peak object.
 #' @export
@@ -33,6 +28,6 @@ summary.Peak <- function(obj) {
   cat("Summary of Detected Peaks:\n")
   cat("Number of Peaks:", length(obj$positions), "\n")
   cat("Average Peak Height:", mean(obj$heights), "\n")
-  cat("Peak Positions:", obj$positions, "\n")
-  cat("Peak Heights:", obj$heights, "\n")
+  cat("Peak Positions:", paste(obj$positions, collapse = " "), "\n")
+  cat("Peak Heights:", paste(obj$heights, collapse = " "), "\n")
 }
