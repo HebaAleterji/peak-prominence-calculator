@@ -15,7 +15,9 @@ detect_peaks <- function(data, min_peak_height = 0, apply_across = "row") {
     peak_positions <- c()
     peak_heights <- c()
 
+    # Loop through the vector, starting from the second element to the second-to-last
     for (i in 2:(length(vec) - 1)) {
+      # Check if vec[i] is greater than its neighbors and meets the height threshold
       if (vec[i] > vec[i - 1] && vec[i] > vec[i + 1] && vec[i] >= min_peak_height) {
         peak_positions <- c(peak_positions, i)
         peak_heights <- c(peak_heights, vec[i])
