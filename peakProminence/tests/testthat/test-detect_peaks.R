@@ -4,7 +4,7 @@ test_that("detect_peaks correctly identifies peaks in 2D data", {
                    2, 8, 10, 4, 5, 11, 14, 6, 1), nrow = 2, byrow = TRUE)
 
   # Detect peaks row-wise
-  result_list <- detect_peaks(data, min_peak_height = 5, apply_across = "row")
+  result_list <- detect_peaks(data, min_peak_height = 5, smoothing = TRUE, apply_across = "row")
 
   # Check if the function detects peaks in both rows correctly
   expect_equal(result_list[[1]]$Position, c(3, 6)) # Expected positions for row 1
