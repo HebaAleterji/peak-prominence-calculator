@@ -10,24 +10,23 @@ Peak <- function(positions, heights) {
   structure(list(positions = positions, heights = heights), class = "Peak")
 }
 
-#' Print a Peak object
-#'
-#' @param obj A Peak object.
+#' Print method for Peak objects
+#' @param x A Peak object.
+#' @param ... Additional arguments (ignored).
 #' @export
-print.Peak <- function(obj) {
-  cat("Detected Peaks\n")
-  cat("Positions:", paste(obj$positions, collapse = " "), "\n")
-  cat("Heights:", paste(obj$heights, collapse = " "), "\n")
+print.Peak <- function(x, ...) {
+  cat("Detected Peaks:\n")
+  print(data.frame(positions = x$positions, heights = x$heights))
 }
 
-#' Summary of a Peak object
-#'
-#' @param obj A Peak object.
+#' Summary method for Peak objects
+#' @param object A Peak object.
+#' @param ... Additional arguments (ignored).
 #' @export
-summary.Peak <- function(obj) {
+summary.Peak <- function(object, ...) {
   cat("Summary of Detected Peaks:\n")
-  cat("Number of Peaks:", length(obj$positions), "\n")
-  cat("Average Peak Height:", mean(obj$heights), "\n")
-  cat("Peak Positions:", paste(obj$positions, collapse = " "), "\n")
-  cat("Peak Heights:", paste(obj$heights, collapse = " "), "\n")
+  cat("Number of Peaks:", length(object$positions), "\n")
+  cat("Average Peak Height:", mean(object$heights), "\n")
+
 }
+

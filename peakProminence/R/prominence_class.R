@@ -10,26 +10,21 @@ Prominence <- function(positions, prominences) {
   structure(list(positions = positions, prominences = prominences), class = "Prominence")
 }
 
-#' Print a Prominence object
-#'
-#' This function prints the prominence values for each peak.
-#'
-#' @param obj A Prominence object.
+#' Print method for Prominence objects
+#' @param x A Prominence object.
+#' @param ... Additional arguments (ignored).
 #' @export
-print.Prominence <- function(obj) {
-  cat("Calculated Prominence\n")
-  cat("Positions:", paste(obj$positions, collapse = " "), "\n")
-  cat("Prominence:", paste(obj$prominences, collapse = " "), "\n")
+print.Prominence <- function(x, ...) {
+  cat("Calculated Prominence:\n")
+  print(data.frame(positions = x$positions, prominences = x$prominences))
 }
 
-#' Summary of a Prominence object
-#'
-#' @param obj A Prominence object.
+#' Summary method for Prominence objects
+#' @param object A Prominence object.
+#' @param ... Additional arguments (ignored).
 #' @export
-summary.Prominence <- function(obj) {
+summary.Prominence <- function(object, ...)  {
   cat("Summary of Peak Prominences:\n")
-  cat("Number of Peaks with Prominence:", length(obj$positions), "\n")
-  cat("Average Prominence Value:", mean(obj$prominences), "\n")
-  cat("Peak Positions:", paste(obj$positions, collapse = " "), "\n")
-  cat("Prominence:", paste(obj$prominences, collapse = " "), "\n")
+  cat("Number of Peaks:", length(object$positions), "\n")
+  cat("Average Prominence:", mean(object$prominences), "\n")
 }
