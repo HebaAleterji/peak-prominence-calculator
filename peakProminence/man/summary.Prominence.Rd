@@ -2,15 +2,15 @@
 % Please edit documentation in R/prominence_class.R
 \name{summary.Prominence}
 \alias{summary.Prominence}
-\title{Summary method for Prominence objects}
+\title{Summary Method for Prominence Class}
 \usage{
 \method{summary}{Prominence}(object, ...)
 }
 \arguments{
 \item{object}{A Prominence object.}
 
-\item{...}{Additional arguments (ignored).}
+\item{...}{Additional parameters.}
 }
 \description{
-Summary method for Prominence objects
+Summary Method for Prominence Class
 }
