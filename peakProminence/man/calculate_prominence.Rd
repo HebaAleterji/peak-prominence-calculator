@@ -2,18 +2,18 @@
 % Please edit documentation in R/calculate_prominence.R
 \name{calculate_prominence}
 \alias{calculate_prominence}
-\title{Calculate Prominence for Peaks}
+\title{Calculate Prominence for Detected Peaks}
 \usage{
-calculate_prominence(data, peaks)
+calculate_prominence(peaks, data)
 }
 \arguments{
-\item{data}{A numeric vector representing the 2D data.}
+\item{peaks}{A Peak object containing peak positions and heights.}
 
-\item{peaks}{A Peak object containing detected peaks.}
+\item{data}{A numeric vector representing the original data.}
 }
 \value{
-A Prominence object containing the prominences of each peak.
+A Prominence object with calculated prominence values for each peak.
 }
 \description{
-Calculate Prominence for Peaks
+Calculate Prominence for Detected Peaks
 }
