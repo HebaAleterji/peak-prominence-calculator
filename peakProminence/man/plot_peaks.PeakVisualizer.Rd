@@ -2,13 +2,13 @@
 % Please edit documentation in R/plot_visualization.R
 \name{plot_peaks.PeakVisualizer}
 \alias{plot_peaks.PeakVisualizer}
-\title{Plot Peaks on 2D Data}
+\title{Plot Peaks}
 \usage{
-plot_peaks.PeakVisualizer(visualizer)
+plot_peaks.PeakVisualizer(object)
 }
 \arguments{
-\item{visualizer}{A PeakVisualizer object.}
+\item{object}{A PeakVisualizer object.}
 }
 \description{
-Plot Peaks on 2D Data
+Plot Peaks
 }
