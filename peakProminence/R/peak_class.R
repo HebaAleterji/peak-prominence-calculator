@@ -1,32 +1,29 @@
-# R/peak_class.R
-
-#' Create a Peak object
-#'
-#' @param positions A numeric vector of peak positions.
-#' @param heights A numeric vector of peak heights.
-#' @return An object of class Peak containing the positions and heights of detected peaks.
+#' Peak Class Constructor
+#' Creates a Peak object containing peak positions and heights.
+#' @param positions Numeric vector of peak positions.
+#' @param heights Numeric vector of peak heights.
+#' @return A Peak object.
 #' @export
 Peak <- function(positions, heights) {
   structure(list(positions = positions, heights = heights), class = "Peak")
 }
 
-#' Print method for Peak objects
+#' Print Method for Peak Class
 #' @param x A Peak object.
-#' @param ... Additional arguments (ignored).
+#' @param ... Additional parameters.
 #' @export
 print.Peak <- function(x, ...) {
   cat("Detected Peaks:\n")
-  print(data.frame(positions = x$positions, heights = x$heights))
+  cat("Positions: ", x$positions, "\n")
+  cat("Heights: ", x$heights, "\n")
 }
 
-#' Summary method for Peak objects
+#' Summary Method for Peak Class
 #' @param object A Peak object.
-#' @param ... Additional arguments (ignored).
+#' @param ... Additional parameters.
 #' @export
 summary.Peak <- function(object, ...) {
   cat("Summary of Detected Peaks:\n")
   cat("Number of Peaks:", length(object$positions), "\n")
   cat("Average Peak Height:", mean(object$heights), "\n")
-
 }
-
