@@ -2,18 +2,18 @@
 % Please edit documentation in R/detect_peaks.R
 \name{detect_peaks}
 \alias{detect_peaks}
-\title{Detect Peaks in 2D Data}
+\title{Detect Peaks in 2D Data
+This function uses \code{pracma::findpeaks} to detect peaks in a numeric vector.}
 \usage{
-detect_peaks(data, min_peak_height = 5)
+detect_peaks(data)
 }
 \arguments{
-\item{data}{A numeric vector representing the 2D data.}
-
-\item{min_peak_height}{The minimum height a peak must have to be considered a peak.}
+\item{data}{A numeric vector representing the data.}
 }
 \value{
-A Peak object containing the positions and heights of the detected peaks.
+A Peak object with positions and heights of detected peaks.
 }
 \description{
 Detect Peaks in 2D Data
+This function uses \code{pracma::findpeaks} to detect peaks in a numeric vector.
 }
