@@ -2,18 +2,20 @@
 % Please edit documentation in R/prominence_class.R
 \name{Prominence}
 \alias{Prominence}
-\title{Create a Prominence object}
+\title{Prominence Class Constructor
+Creates a Prominence object.}
 \usage{
 Prominence(positions, prominences)
 }
 \arguments{
-\item{positions}{A numeric vector of peak positions.}
+\item{positions}{Numeric vector of peak positions.}
 
-\item{prominences}{A numeric vector of the prominence values for each peak.}
+\item{prominences}{Numeric vector of prominence values.}
 }
 \value{
-An object of class Prominence containing the positions and prominence values of the peaks.
+A Prominence object.
 }
 \description{
-Create a Prominence object
+Prominence Class Constructor
+Creates a Prominence object.
 }
