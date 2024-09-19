@@ -1,10 +1,18 @@
-
 #' Detect Peaks in 2D Data
-#' @param data A numeric vector representing the 2D data.
-#' @param min_peak_height The minimum height a peak must have to be considered a peak.
-#' @return A Peak object containing the positions and heights of the detected peaks.
+#' This function uses `pracma::findpeaks` to detect peaks in a numeric vector.
+#' @param data A numeric vector representing the data.
+#' @return A Peak object with positions and heights of detected peaks.
 #' @export
-detect_peaks <- function(data, min_peak_height = 5) {
-  peaks <- pracma::findpeaks(data, minpeakheight = min_peak_height)
+detect_peaks <- function(data) {
+  # Use a peak detection algorithm from pracma
+  peaks <- pracma::findpeaks(data, sortstr = TRUE)
+
+  # Handle case where no peaks are found
+  if (is.null(peaks)) {
+    return(Peak(positions = numeric(0), heights = numeric(0)))
+  }
+
+  # Extract positions and heights from the result
   Peak(positions = peaks[, 2], heights = peaks[, 1])
 }
+
