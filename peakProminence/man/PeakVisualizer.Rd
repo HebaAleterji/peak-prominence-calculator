@@ -2,20 +2,18 @@
 % Please edit documentation in R/peak_visualizer_class.R
 \name{PeakVisualizer}
 \alias{PeakVisualizer}
-\title{PeakVisualizer class}
+\title{PeakVisualizer Class Constructor
+Creates a PeakVisualizer object to handle peak and prominence visualization.}
 \usage{
-PeakVisualizer(data, peaks, prominence = NULL)
+PeakVisualizer(data)
 }
 \arguments{
-\item{data}{A numeric vector representing the signal data.}
-
-\item{peaks}{A Peak object containing detected peaks.}
-
-\item{prominence}{(Optional) A Prominence object containing prominence values for the peaks.}
+\item{data}{Numeric vector of data points.}
 }
 \value{
 A PeakVisualizer object.
 }
 \description{
-PeakVisualizer class
+PeakVisualizer Class Constructor
+Creates a PeakVisualizer object to handle peak and prominence visualization.
 }
