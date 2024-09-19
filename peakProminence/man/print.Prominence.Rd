@@ -2,15 +2,15 @@
 % Please edit documentation in R/prominence_class.R
 \name{print.Prominence}
 \alias{print.Prominence}
-\title{Print method for Prominence objects}
+\title{Print Method for Prominence Class}
 \usage{
 \method{print}{Prominence}(x, ...)
 }
 \arguments{
 \item{x}{A Prominence object.}
 
-\item{...}{Additional arguments (ignored).}
+\item{...}{Additional parameters.}
 }
 \description{
-Print method for Prominence objects
+Print Method for Prominence Class
 }

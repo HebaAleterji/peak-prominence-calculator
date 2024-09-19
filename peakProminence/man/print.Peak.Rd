@@ -2,15 +2,15 @@
 % Please edit documentation in R/peak_class.R
 \name{print.Peak}
 \alias{print.Peak}
-\title{Print method for Peak objects}
+\title{Print Method for Peak Class}
 \usage{
 \method{print}{Peak}(x, ...)
 }
 \arguments{
 \item{x}{A Peak object.}
 
-\item{...}{Additional arguments (ignored).}
+\item{...}{Additional parameters.}
 }
 \description{
-Print method for Peak objects
+Print Method for Peak Class
 }

@@ -2,15 +2,15 @@
 % Please edit documentation in R/peak_class.R
 \name{summary.Peak}
 \alias{summary.Peak}
-\title{Summary method for Peak objects}
+\title{Summary Method for Peak Class}
 \usage{
 \method{summary}{Peak}(object, ...)
 }
 \arguments{
 \item{object}{A Peak object.}
 
-\item{...}{Additional arguments (ignored).}
+\item{...}{Additional parameters.}
 }
 \description{
-Summary method for Peak objects
+Summary Method for Peak Class
 }
