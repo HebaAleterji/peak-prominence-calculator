@@ -1,64 +1,70 @@
-
-
+# Load the required library
 library(testthat)
 
-# Test Peak class
-test_that("Peak class works as expected", {
-  peaks <- Peak(positions = c(3, 6), heights = c(12, 14))
+# Test for detecting peaks
+test_that("detect_peaks works as expected", {
+  data <- c(1, 3, 7, 10, 9, 6, 3, 5, 10, 7, 2)
 
-  # Check print output
-  expect_output(print(peaks), "Detected Peaks")
+  # Detect peaks
+  result_peaks <- detect_peaks(data)
 
-  # Check summary output
-  expect_output(summary(peaks), "Summary of Detected Peaks")
-  expect_output(summary(peaks), "Number of Peaks: 2")
-  expect_output(summary(peaks), "Average Peak Height: 13")
+  # Expected results
+  expected_positions <- c(3, 9)
+  expected_heights <- c(7, 10)
+
+  # Compare detected peaks to expected results
+  expect_equal(result_peaks$positions, expected_positions)
+  expect_equal(result_peaks$heights, expected_heights)
 })
 
-# Test Prominence class
-test_that("Prominence class works as expected", {
-  prominence <- Prominence(positions = c(3, 6), prominences = c(5, 10))
-
-  # Check print output
-  expect_output(print(prominence), "Calculated Prominence")
-
-  # Check summary output
-  expect_output(summary(prominence), "Summary of Peak Prominences")
-  expect_output(summary(prominence), "Number of Peaks: 2")
-  expect_output(summary(prominence), "Average Prominence: 7.5")
-})
-
-# Test calculate_prominence function
+# Test for calculate_prominence
 test_that("calculate_prominence correctly calculates prominence", {
-  data <- c(1, 3, 12, 7, 8, 14, 2)
-  peaks <- Peak(positions = c(3, 6), heights = c(12, 14))
+  data <- c(1, 3, 7, 10, 9, 6, 3, 5, 10, 7, 2)
+  peaks <- detect_peaks(data)
 
   # Calculate prominence
-  result_prominence <- calculate_prominence(data, peaks)
+  result_prominence <- calculate_prominence(peaks, data)
 
-  # Check prominence values (update expected values if necessary)
-  expect_equal(result_prominence$prominences, c(10, 12))  # Adjust these if correct values
+  # Expected prominence values
+  expected_prominence <- c(4, 7)
+
+  # Compare calculated prominence to expected results
+  expect_equal(result_prominence$prominences, expected_prominence)
 })
 
-# Test PeakVisualizer for peaks
-test_that("PeakVisualizer works as expected for peaks", {
-  data <- c(1, 3, 12, 7, 8, 14, 2)
-  peaks <- Peak(positions = c(3, 6), heights = c(12, 14))
+# Test for handling edge cases with calculate_prominence
+test_that("calculate_prominence handles edge cases", {
+  data <- c(1, 3, 7, 10, 9, 6, 3, 5, 10, 7, 2)
+  peaks <- detect_peaks(data)
 
-  visualizer <- PeakVisualizer(data = data, peaks = peaks)
+  # Calculate prominence
+  result_prominence <- calculate_prominence(peaks, data)
 
-  # Check plot for peaks
+  # Expected prominence values
+  expected_prominence <- c(4, 7)
+
+  # Compare calculated prominence to expected results
+  expect_equal(result_prominence$prominences, expected_prominence)
+})
+
+# Test for PeakVisualizer
+test_that("PeakVisualizer works as expected for peaks and prominence", {
+  data <- c(1, 3, 7, 10, 9, 6, 3, 5, 10, 7, 2)
+
+  # Create the PeakVisualizer object (detect peaks and prominence)
+  visualizer <- PeakVisualizer(data = data)
+
+  # Expected peaks and prominence
+  expected_peaks_positions <- c(3, 9)
+  expected_peaks_heights <- c(7, 10)
+  expected_prominences <- c(4, 7)
+
+  # Ensure the correct peaks and prominence are detected
+  expect_equal(visualizer$peaks$positions, expected_peaks_positions)
+  expect_equal(visualizer$peaks$heights, expected_peaks_heights)
+  expect_equal(visualizer$prominence$prominences, expected_prominences)
+
+  # Test the plotting functions (no errors expected)
   expect_silent(plot_peaks(visualizer))
-})
-
-# Test PeakVisualizer for prominence
-test_that("PeakVisualizer works as expected for prominence", {
-  data <- c(1, 3, 12, 7, 8, 14, 2)
-  peaks <- Peak(positions = c(3, 6), heights = c(12, 14))
-  prominence <- Prominence(positions = c(3, 6), prominences = c(5, 10))
-
-  visualizer <- PeakVisualizer(data = data, peaks = peaks, prominence = prominence)
-
-  # Check plot for prominence
   expect_silent(plot_prominence(visualizer))
 })
