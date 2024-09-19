@@ -2,18 +2,20 @@
 % Please edit documentation in R/peak_class.R
 \name{Peak}
 \alias{Peak}
-\title{Create a Peak object}
+\title{Peak Class Constructor
+Creates a Peak object containing peak positions and heights.}
 \usage{
 Peak(positions, heights)
 }
 \arguments{
-\item{positions}{A numeric vector of peak positions.}
+\item{positions}{Numeric vector of peak positions.}
 
-\item{heights}{A numeric vector of peak heights.}
+\item{heights}{Numeric vector of peak heights.}
 }
 \value{
-An object of class Peak containing the positions and heights of detected peaks.
+A Peak object.
 }
 \description{
-Create a Peak object
+Peak Class Constructor
+Creates a Peak object containing peak positions and heights.
 }
