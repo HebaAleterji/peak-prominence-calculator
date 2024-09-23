@@ -17,17 +17,31 @@
 #' }
 #'
 
-#' Detect Peaks in 1D or 2D Data
-#' This function detects peaks in either a numeric vector (1D) or a matrix (2D).
-#' For 2D data, it can detect peaks row-wise or column-wise.
-#' @param data A numeric vector (1D) or matrix (2D).
-#' @param axis For 2D data, specify whether to detect peaks by "rows" or "columns".
-#' @return For 1D data, returns a Peak object. For 2D data, returns a list of Peak objects for each row or column.
+#' Detect Peaks in 1D and 2D Data
+#' This function detects peaks in either 1D or 2D data. For 1D, it uses
+#' `pracma::findpeaks` to detect local maxima. For 2D data, it detects
+#' peaks along each column.
+#' @param data A numeric vector (1D) or matrix (2D) representing the data.
+#' @return A list of Peak objects, or a single Peak object for 1D data.
 #' @export
-detect_peaks <- function(data, axis = "rows") {
-  # Handle 1D data (numeric vector)
-  if (is.vector(data) && is.numeric(data)) {
-    # Use pracma::findpeaks to detect peaks in 1D data
+detect_peaks <- function(data) {
+  # Check if the input is a matrix (2D data)
+  if (is.matrix(data)) {
+    peak_list <- list()
+    for (i in 1:ncol(data)) {
+      column_data <- data[, i]
+      peaks <- pracma::findpeaks(column_data, sortstr = TRUE)
+
+      if (is.null(peaks)) {
+        peak_list[[i]] <- Peak(positions = numeric(0), heights = numeric(0))
+      } else {
+        peak_list[[i]] <- Peak(positions = peaks[, 2], heights = peaks[, 1])
+      }
+    }
+    return(peak_list)
+
+    # If the input is not a matrix, treat it as 1D data
+  } else if (is.vector(data)) {
     peaks <- pracma::findpeaks(data, sortstr = TRUE)
 
     if (is.null(peaks)) {
@@ -35,29 +49,8 @@ detect_peaks <- function(data, axis = "rows") {
     }
 
     return(Peak(positions = peaks[, 2], heights = peaks[, 1]))
+  } else {
+    stop("Input data must be either a numeric vector (1D) or matrix (2D).")
   }
-
-  # Handle 2D data (matrix)
-  if (is.matrix(data)) {
-    peaks_list <- list()
-
-    # Detect peaks row-wise or column-wise
-    if (axis == "rows") {
-      for (i in 1:nrow(data)) {
-        row_peaks <- detect_peaks(data[i, ])  # Re-use the 1D peak detection logic
-        peaks_list[[paste("row", i)]] <- row_peaks
-      }
-    } else if (axis == "columns") {
-      for (i in 1:ncol(data)) {
-        col_peaks <- detect_peaks(data[, i])  # Re-use the 1D peak detection logic
-        peaks_list[[paste("column", i)]] <- col_peaks
-      }
-    } else {
-      stop("Invalid axis. Choose either 'rows' or 'columns'.")
-    }
-
-    return(peaks_list)
-  }
-
-  stop("Input must be a numeric vector or a 2D matrix.")
 }
+
