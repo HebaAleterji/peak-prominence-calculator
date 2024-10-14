@@ -4,7 +4,7 @@
 #' @param heights Numeric vector of peak heights.
 #' @return A Peak object.
 #' @export
-.Peak <- function(positions, heights) {
+Peak <- function(positions, heights) {
   structure(list(positions = positions, heights = heights), class = "Peak")
 }
 

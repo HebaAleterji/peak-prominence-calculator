@@ -3,7 +3,7 @@
 #' @param data Numeric vector of data points.
 #' @return A PeakVisualizer object.
 #' @export
-.PeakVisualizer <- function(data, peaks, prominence) {
+PeakVisualizer <- function(data, peaks, prominence) {
   structure(list(data = data, peaks = peaks, prominence = prominence), class = "PeakVisualizer")
 }
 
