@@ -4,7 +4,7 @@
 #' @param prominences Numeric vector of prominence values.
 #' @return A Prominence object.
 #' @export
-Prominence <- function(positions, prominences) {
+.Prominence <- function(positions, prominences) {
   structure(list(positions = positions, prominences = prominences), class = "Prominence")
 }
 
