@@ -1,0 +1,124 @@
+---
+title: "peakProminence Package Vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{peakProminence}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+# Set CRAN mirror
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+```
+
+```{r setup}
+library(peakProminence)
+```
+
+# Introduction
+The peakProminence package provides a suite of tools for detecting peaks in 1D and 2D data and calculating the prominence of these peaks. This package allows users to analyze time-series or other signal data to identify local maxima and calculate their prominences, which measure how much a peak stands out relative to its surroundings. Additionally, it offers visualization tools for easy interpretation of the detected peaks and their prominences.
+
+In this vignette, we will walk through the basic functionality of the peakProminence package, including peak detection, prominence calculation, and visualization of results.
+
+# Installation
+You can install the peakProminence package with the following:
+
+```{r}
+
+# Install devtools if it is not already installed
+install.packages("devtools")
+
+# Install peakProminence from GitHub
+devtools::install_github("HebaAleterji/peak-prominence-calculator/peakProminence")
+
+```
+
+
+# Example Workflow
+Let's walk through a workflow that demonstrates how to use peakProminence for peak detection and prominence calculation.
+
+## 1. Simulating 2D Data
+
+We will start by generating 2D data representing a signal for peak detection:
+
+```{r}
+set.seed(123)
+n_points <- 100
+x <- seq(1, n_points)
+y <- sin(x / 5) * 10 + rnorm(n_points, sd = 1)
+data <- data.frame(x = x, y = y)
+
+# Plot the data
+plot(data$x, data$y, type = "l", main = "Simulated Signal Data", xlab = "Index", ylab = "Value")
+
+
+```
+
+This generates a noisy sinusoidal signal that we can use for peak detection.
+
+## 2. Detecting Peaks
+
+To detect peaks in the data, we use the detect_peaks() function. It analyzes the signal and identifies the local maxima:
+
+```{r}
+library(peakProminence)
+
+# Detect peaks in the data
+peaks <- detect_peaks(data$y)
+print(peaks)
+
+```
+
+This returns a Peak object containing the positions and heights of the detected peaks.
+
+## 3. Calculating Prominence
+
+Once peaks are detected, we can calculate their prominence using the calculate_prominence() function. The prominence of a peak measures how much the peak stands out relative to its surrounding area.
+```{r}
+# Calculate prominence for the detected peaks
+prominence <- calculate_prominence(peaks, data$y)
+print(prominence)
+
+```
+
+This will return a Prominence object containing the prominence values for each peak.
+
+## 4. Visualizing the Results
+
+We can visualize the detected peaks and their prominences using the plot_peaks() and plot_prominence() functions:
+```{r}
+# Create a PeakVisualizer object for visualization
+visualizer <- PeakVisualizer(data = data$y)
+
+# Plot the detected peaks
+plot_peaks(visualizer)
+
+# Plot the prominences of each peak
+plot_prominence(visualizer)
+
+```
+
+The plot_peaks() function highlights the detected peaks, while plot_prominence() shows the prominence of each peak with vertical bars indicating how much each peak stands out.
+
+## 5. Peak Information
+
+To obtain detailed information about the peaks, such as their positions, heights, and prominence values, use the get_peak_info() function:
+```{r}
+# Get combined peak information
+peak_info <- get_peak_info(peaks, prominence)
+print(peak_info)
+
+```
+This returns a data frame that includes the peak positions, heights, and their calculated prominence values.
+
+# Conclusion
+
+The peakProminence package provides a simple and efficient way to detect peaks in time-series or signal data, calculate their prominence, and visualize the results. It is suitable for various applications where identifying prominent features in data is critical.
+
+This vignette demonstrated how to simulate data, detect peaks, calculate prominence, and visualize the results.

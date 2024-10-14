@@ -1,14 +1,25 @@
 Package: peakProminence
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Type: Package
+Title: Tools for Peak Detection and Prominence Calculation in 1D and 2D Data
+Version: 0.1.0
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person(given = "Heba",
+           family = "Aleterji",
+           role = c("aut", "cre"),
+           email = "hebaaleterji@gmail.com")
+Description: The peakProminence package provides a set of tools to detect peaks and calculate their prominence in 1D and 2D data. It allows users to analyze signal data to identify peaks, compute the prominence of each peak (the vertical distance between the peak's height and the surrounding signal), and visualize the results with ease. It includes functions for peak detection, prominence calculation, and plotting of peaks and their prominences for detailed analysis. 
 License: MIT + file LICENSE
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+LazyData: true
+RoxygenNote: 7.1.2
+Imports: 
+    pracma,
+    graphics,
+    stats
 Suggests: 
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0),
+    devtools
+VignetteBuilder: knitr
+Depends: R (>= 3.6)
