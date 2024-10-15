@@ -2,18 +2,20 @@
 % Please edit documentation in R/get_peak_info.R
 \name{get_peak_info}
 \alias{get_peak_info}
-\title{Get combined peak information as a data frame}
+\title{Get combined peak information as a data frame
+Combines peak positions, heights, and prominence values into a single data frame.}
 \usage{
 get_peak_info(peaks, prominence)
 }
 \arguments{
-\item{peaks}{A Peak object.}
+\item{peaks}{A PeakData object (or equivalent).}
 
-\item{prominence}{A Prominence object.}
+\item{prominence}{A PeakProminence object (or equivalent).}
 }
 \value{
-A data frame with Peak Position, Peak Height, and Prominence.
+A data frame with columns: Peak Position, Peak Height, and Prominence.
 }
 \description{
 Get combined peak information as a data frame
+Combines peak positions, heights, and prominence values into a single data frame.
 }

@@ -2,18 +2,22 @@
 % Please edit documentation in R/calculate_prominence.R
 \name{calculate_prominence}
 \alias{calculate_prominence}
-\title{Calculate Prominence for Detected Peaks}
+\title{Calculate Prominence for Detected Peaks in 1D or 2D Data
+The prominence is the vertical distance between the peak height and the higher minimum
+between the peak's left and right neighbors.}
 \usage{
 calculate_prominence(peaks, data)
 }
 \arguments{
-\item{peaks}{A Peak object containing peak positions and heights.}
+\item{peaks}{A PeakData object (1D) or a list of PeakData objects (2D).}
 
-\item{data}{A numeric vector representing the original data.}
+\item{data}{A numeric vector (1D) or matrix (2D) representing the original data.}
 }
 \value{
-A Prominence object with calculated prominence values for each peak.
+A Prominence object (for 1D) or a list of Prominence objects (for 2D).
 }
 \description{
-Calculate Prominence for Detected Peaks
+Calculate Prominence for Detected Peaks in 1D or 2D Data
+The prominence is the vertical distance between the peak height and the higher minimum
+between the peak's left and right neighbors.
 }
