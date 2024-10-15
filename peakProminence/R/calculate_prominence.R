@@ -1,14 +1,9 @@
-# Required packages
-library(pracma)
-library(mclust)  # For Gaussian Mixture Models (GMM)
-
-#' Calculate Prominence with Baseline Consideration (for sine-wave, Gaussian, etc.)
+#' Calculate Prominence for Detected Peaks
 #' @param peaks A Peak object containing peak positions and heights.
 #' @param data A numeric vector representing the original data.
-#' @param baseline Optional, a numeric value representing the baseline for sine waves or Gaussian mixtures.
 #' @return A Prominence object with calculated prominence values for each peak.
 #' @export
-calculate_prominence_with_baseline <- function(peaks, data, baseline = NULL) {
+calculate_prominence <- function(peaks, data) {
   if (length(peaks$positions) == 0) {
     return(Prominence(positions = numeric(0), prominences = numeric(0)))
   }
@@ -16,13 +11,11 @@ calculate_prominence_with_baseline <- function(peaks, data, baseline = NULL) {
   n_peaks <- length(peaks$positions)
   prominences <- numeric(n_peaks)
 
-  # If no baseline is provided, estimate one using a Gaussian Mixture Model
-  if (is.null(baseline)) {
     # Using Gaussian Mixture Model to estimate the baseline
     gmm_model <- Mclust(data, G = 2)  # Try modeling the data as two Gaussian distributions
     baseline <- min(gmm_model$parameters$mean)  # Use the mean of the smaller Gaussian component
     cat("Estimated baseline using GMM:", baseline, "\n")
-  }
+
 
   for (i in seq_along(peaks$positions)) {
     peak_pos <- peaks$positions[i]
@@ -53,3 +46,5 @@ calculate_prominence_with_baseline <- function(peaks, data, baseline = NULL) {
 
   return(Prominence(positions = peaks$positions, prominences = prominences))
 }
+}
+
