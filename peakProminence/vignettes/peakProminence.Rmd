@@ -69,9 +69,13 @@ To detect peaks in the data, we use the detect_peaks() function. It analyzes the
 ```{r}
 library(peakProminence)
 
+
 # Detect peaks in the data
 peaks <- detect_peaks(data$y)
-print(peaks)
+
+# View the detected peaks
+peaks
+
 
 ```
 
