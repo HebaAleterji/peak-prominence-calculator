@@ -4,8 +4,18 @@
 #' @param heights Numeric vector of peak heights.
 #' @return A Peak object.
 #' @export
+# Constructor for the Peak object
 Peak <- function(positions, heights) {
-  structure(list(positions = positions, heights = heights), class = "Peak")
+  # Ensure positions and heights are numeric vectors
+  if (!is.numeric(positions) || !is.numeric(heights)) {
+    stop("positions and heights must be numeric")
+  }
+
+  # Create a list and assign the class "Peak"
+  structure(list(
+    positions = positions,
+    heights = heights
+  ), class = "Peak")
 }
 
 #' Print Method for Peak Class

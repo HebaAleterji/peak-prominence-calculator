@@ -118,6 +118,7 @@ To obtain detailed information about the peaks, such as their positions, heights
 peak_info <- get_peak_info(peaks, prominence)
 print(peak_info)
 
+
 ```
 This returns a data frame that includes the peak positions, heights, and their calculated prominence values.
 

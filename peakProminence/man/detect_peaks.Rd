@@ -3,7 +3,7 @@
 \name{detect_peaks}
 \alias{detect_peaks}
 \title{Detect Peaks in 2D Data
-This function uses \code{pracma::findpeaks} to detect peaks in a numeric vector.}
+This function uses `pracma::findpeaks` to detect peaks in a numeric vector.}
 \usage{
 detect_peaks(data)
 }
@@ -15,5 +15,5 @@ A Peak object with positions and heights of detected peaks.
 }
 \description{
 Detect Peaks in 2D Data
-This function uses \code{pracma::findpeaks} to detect peaks in a numeric vector.
+This function uses `pracma::findpeaks` to detect peaks in a numeric vector.
 }

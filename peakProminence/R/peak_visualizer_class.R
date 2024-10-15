@@ -3,7 +3,9 @@
 #' @param data Numeric vector of data points.
 #' @return A PeakVisualizer object.
 #' @export
-PeakVisualizer <- function(data, peaks, prominence) {
+PeakVisualizer <- function(data) {
+  peaks <- detect_peaks(data)
+  prominence <- calculate_prominence(peaks, data)
   structure(list(data = data, peaks = peaks, prominence = prominence), class = "PeakVisualizer")
 }
 

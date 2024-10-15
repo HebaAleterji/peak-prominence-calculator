@@ -4,8 +4,16 @@
 #' @param prominences Numeric vector of prominence values.
 #' @return A Prominence object.
 #' @export
+
+# Constructor for the Prominence object
 Prominence <- function(positions, prominences) {
-  structure(list(positions = positions, prominences = prominences), class = "Prominence")
+  if (!is.numeric(positions) || !is.numeric(prominences)) {
+    stop("positions and prominences must be numeric")
+  }
+  structure(list(
+    positions = positions,
+    prominences = prominences
+  ), class = "Prominence")
 }
 
 #' Print Method for Prominence Class
