@@ -1,9 +1,4 @@
 #' Calculate Prominence for Detected Peaks
-#'
-#' This function calculates the prominence of each peak as the height difference
-#' between the peak and the lowest point in the surrounding region that separates
-#' it from neighboring higher peaks.
-#'
 #' @param peaks A Peak object containing peak positions and heights.
 #' @param data A numeric vector representing the original data.
 #' @return A Prominence object with calculated prominence values for each peak.
@@ -20,41 +15,22 @@ calculate_prominence <- function(peaks, data) {
     peak_pos <- peaks$positions[i]
     peak_height <- peaks$heights[i]
 
-    # Left-side minimum: Scan leftward until you find a higher peak or the edge of the data
-    left_min <- peak_height
-    if (peak_pos > 1) {
-      for (j in seq(peak_pos - 1, 1)) {
-        if (data[j] >= peak_height) {
-          break
-        }
-        left_min <- min(left_min, data[j])
-      }
-    }
+    # Find the local minimum to the left of the peak (if it exists)
+    left_min <- if (peak_pos > 1) min(data[1:(peak_pos - 1)]) else peak_height
 
-    # Right-side minimum: Scan rightward until you find a higher peak or the edge of the data
-    right_min <- peak_height
-    if (peak_pos < length(data)) {
-      for (j in seq(peak_pos + 1, length(data))) {
-        if (data[j] >= peak_height) {
-          break
-        }
-        right_min <- min(right_min, data[j])
-      }
-    }
+    # Find the local minimum to the right of the peak (if it exists)
+    right_min <- if (peak_pos < length(data)) min(data[(peak_pos + 1):length(data)]) else peak_height
 
-    # Use the smaller of the two minima (closer to the peak)
-    closer_min <- min(left_min, right_min)
+    # Prominence should be the peak height minus the higher of the two minima
+    valley_min <- max(left_min, right_min)
 
     # Prominence is the peak height minus the closer minimum
-    prominences[i] <- peak_height - closer_min
+    prominences[i] <- peak_height - valley_min
 
-    # Optional Debugging (can be removed in production)
-    cat("Peak at position", peak_pos, ": Left Min =", left_min,
-        ", Right Min =", right_min, ", Closer Min =", closer_min,
-        ", Peak Height =", peak_height, "\n")
+    # Debugging: Print calculated prominence
+    cat("Peak at position", peak_pos, ": Left Min =", left_min, ", Right Min =", right_min, ", Valley Min =", valley_min, ", Peak Height =", peak_height, "\n")
     cat("Calculated prominence for peak at position", peak_pos, "=", prominences[i], "\n")
   }
 
-  # Return a Prominence object containing positions and calculated prominences
   return(Prominence(positions = peaks$positions, prominences = prominences))
 }
