@@ -22,12 +22,17 @@ as.peak <- function(positions, heights) {
 
 #' Print Method for PeakData Class
 #' @param x A PeakData object.
-#' @param ... Additional parameters.
+#' @param ... Additional parameters (currently unused).
 #' @export
 print.PeakData <- function(x, ...) {
   if (!inherits(x, "PeakData")) {
     stop("Object is not of class 'PeakData'")
   }
+  # Handle unused arguments (if any are passed)
+  if (length(list(...)) > 0) {
+    warning("Additional arguments ignored in print.PeakData.")
+  }
+
   cat("Detected Peaks:\n")
   cat("Positions: ", paste(x$positions, collapse = ", "), "\n")
   cat("Heights: ", paste(x$heights, collapse = ", "), "\n")
@@ -35,13 +40,19 @@ print.PeakData <- function(x, ...) {
 
 #' Summary Method for PeakData Class
 #' @param object A PeakData object.
-#' @param ... Additional parameters.
+#' @param ... Additional parameters (currently unused).
 #' @export
 summary.PeakData <- function(object, ...) {
   if (!inherits(object, "PeakData")) {
     stop("Object is not of class 'PeakData'")
   }
+  # Handle unused arguments (if any are passed)
+  if (length(list(...)) > 0) {
+    warning("Additional arguments ignored in summary.PeakData.")
+  }
+
   cat("Summary of Detected Peaks:\n")
   cat("Number of Peaks:", length(object$positions), "\n")
   cat("Average Peak Height:", mean(object$heights), "\n")
 }
+

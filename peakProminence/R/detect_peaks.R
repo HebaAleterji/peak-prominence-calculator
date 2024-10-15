@@ -20,8 +20,7 @@ detect_peaks <- function(data, noise_threshold = NULL, min_distance = 1) {
     # Handle 1D data
     peaks <- pracma::findpeaks(data,
                                minpeakheight = noise_threshold,
-                               minpeakdistance = min_distance,
-                               sortstr = TRUE)
+                               minpeakdistance = min_distance)
 
     if (is.null(peaks)) {
       return(as.peak(positions = numeric(0), heights = numeric(0)))
@@ -37,8 +36,7 @@ detect_peaks <- function(data, noise_threshold = NULL, min_distance = 1) {
     detect_single_peaks <- function(row_data) {
       peaks <- pracma::findpeaks(row_data,
                                  minpeakheight = noise_threshold,
-                                 minpeakdistance = min_distance,
-                                 sortstr = TRUE)
+                                 minpeakdistance = min_distance)
       if (is.null(peaks)) {
         return(as.peak(positions = numeric(0), heights = numeric(0)))
       }

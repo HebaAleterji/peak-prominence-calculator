@@ -1,0 +1,140 @@
+
+---
+title: "peakProminence Package Vignette"
+author: "Author Name"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{peakProminence Package Vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+# Set CRAN mirror to cloud R-project
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+
+```
+
+```{r}
+library(peakProminence)
+```
+
+
+```{r, include = FALSE}
+# Set CRAN mirror to cloud R-project
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+
+```
+
+# Introduction
+The peakProminence package provides tools for detecting peaks in 1D or 2D data and calculating the prominence of those peaks. Prominence measures how much a peak stands out relative to its surroundings. This package is designed to be useful for analyzing time-series or signal data to identify important features.
+
+In this vignette, we will demonstrate how to:
+
+1. Simulate data
+
+2. Detect peaks in the data
+
+3. Calculate the prominence of detected peaks
+
+4. Visualize the results using built-in plotting functions
+
+# Installation
+You can install the peakProminence package directly from GitHub as follows:
+
+```{r}
+# Install devtools if you don't have it
+install.packages("devtools")
+
+# Install peakProminence from GitHub
+devtools::install_github("HebaAleterji/peak-prominence-calculator/peakProminence")
+
+```
+
+# Simulating Data
+
+We'll begin by simulating some data that represents a noisy signal. In this case, we use a sum of Gaussian functions to create peaks at different positions with random noise.
+
+```{r}
+# Simulate some data
+set.seed(13)
+n_comp <- 12
+means <- runif(n_comp, -4, 11)
+weights <- runif(n_comp, 0.25, 1.1)
+weights <- weights / sum(weights)
+sigmas <- runif(n_comp, 0.5, 1.5)
+x <- seq(-6, 13, length.out = 100)
+y <- rep(0, 100)
+for (i in 1:n_comp) {
+  y <- y + weights[i] * dnorm(x, means[i], sigmas[i])
+}
+
+# Plot the simulated data
+plot(x, y, type = "l", main = "Simulated Signal", xlab = "Index", ylab = "Value")
+
+```
+
+# Detecting Peaks
+
+To detect peaks in the simulated signal, we use the detect_peaks() function. This function identifies local maxima in the data and returns their positions and heights.
+
+```{r}
+# Detect peaks in the simulated data
+peaks <- detect_peaks(y)
+
+# Print the detected peaks
+print(peaks)
+
+```
+# Calculating Prominence
+Once the peaks are detected, we can calculate their prominence using the calculate_prominence() function. Prominence measures how much a peak stands out relative to its surrounding valleys.
+
+```{r}
+# Calculate prominence for the detected peaks
+prominence <- calculate_prominence(peaks, y)
+
+# Print the calculated prominence values
+print(prominence)
+
+```
+
+# Combining Peak Information
+The get_peak_info() function combines the positions, heights, and prominence values of detected peaks into a single data frame for easier analysis.
+
+```{r}
+
+# Get a data frame with peak information
+peak_info <- get_peak_info(peaks, prominence)
+
+# Display the peak information
+print(peak_info)
+
+```
+
+# Visualizing Peaks
+We can visualize the detected peaks on top of the original signal using the plot_peaks() function.
+
+```{r}
+
+# Plot the original signal and highlight the detected peaks
+plot_peaks(peaks, y)
+
+```
+# Visualizing Prominence
+
+Similarly, we can visualize the prominence of each detected peak using the plot_prominence() function. This function plots vertical lines indicating how far down each peak's prominence extends.
+
+```{r}
+# Plot the prominence of each peak
+plot_prominence(peaks, prominence, y)
+
+```
+
+# Conclusion
+
+The peakProminence package offers a simple and effective way to detect peaks and calculate their prominence in both 1D and 2D datasets. In this vignette, we have demonstrated the core functionality of the package using a simulated signal. These tools can be applied to a wide variety of real-world problems where identifying and analyzing important features in time-series or signal data is essential.

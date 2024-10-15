@@ -9,7 +9,7 @@
 \arguments{
 \item{object}{A PeakData object.}
 
-\item{...}{Additional parameters.}
+\item{...}{Additional parameters (currently unused).}
 }
 \description{
 Summary Method for PeakData Class
