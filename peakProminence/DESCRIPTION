@@ -1,6 +1,6 @@
 Package: peakProminence
 Type: Package
-Title: Tools for Peak Detection and Prominence Calculation in 1D and 2D Data
+Title: Tools for Peak Detection and Prominence Calculation in 2D Data
 Version: 0.1.0
 Authors@R: 
     person(given = "Heba",

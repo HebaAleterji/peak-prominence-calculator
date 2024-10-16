@@ -11,6 +11,12 @@
 #'         or a list of PeakData objects for each row of 2D data.
 #' @export
 detect_peaks <- function(data, noise_threshold = NULL, min_distance = 1) {
+
+  # Validate input: Check if the data is numeric
+  if (!is.numeric(data) && !(is.matrix(data) && is.numeric(data[1, ]))) {
+    stop("Data must be either a numeric vector (1D) or a numeric matrix (2D).")
+  }
+
   # Automatically set noise_threshold based on the data, if not provided
   if (is.null(noise_threshold)) {
     noise_threshold <- 0.1 * sd(data)  # Set noise threshold to 10% of standard deviation
