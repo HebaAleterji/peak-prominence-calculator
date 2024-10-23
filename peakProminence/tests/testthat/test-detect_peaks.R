@@ -1,3 +1,6 @@
+library(testthat)
+library(peakProminence)
+
 # Test detect_peaks function for 1D data
 test_that("detect_peaks correctly identifies peaks in 1D data", {
   data <- c(1, 3, 7, 1, 2, 5, 9, 3, 1, 10, 3)
@@ -28,8 +31,8 @@ test_that("detect_peaks handles empty input for 1D data", {
 
   result_peaks <- detect_peaks(data)
 
-  expect_equal(result_peaks$positions, numeric(0))
-  expect_equal(result_peaks$heights, numeric(0))
+  expect_equal(result_peaks$positions, numeric(0), info = "No peaks for empty input")
+  expect_equal(result_peaks$heights, numeric(0), info = "No heights for empty input")
 })
 
 # Test detect_peaks function for 2D data
@@ -48,4 +51,16 @@ test_that("detect_peaks correctly identifies peaks in 2D data", {
   # Sort positions and heights before comparison for the second row
   expect_equal(sort(result_peaks[[2]]$positions), sort(c(10, 3, 7)))
   expect_equal(sort(result_peaks[[2]]$heights), sort(c(9, 8, 7)))
+})
+
+# Test detect_peaks for non-numeric input with error message
+test_that("detect_peaks handles non-numeric input gracefully", {
+  data <- c("a", "b", "c")  # Non-numeric data
+
+  # Expect an error message for non-numeric input using exact string matching
+  expect_error(
+    detect_peaks(data),
+    "Data must be either a numeric vector (1D) or a numeric matrix (2D).",
+    fixed = TRUE  # Perform exact string match instead of regex match
+  )
 })
