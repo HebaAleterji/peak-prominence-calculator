@@ -11,22 +11,25 @@
 #'         or a list of PeakData objects for each row of 2D data.
 #' @export
 detect_peaks <- function(data, noise_threshold = NULL, min_distance = 1) {
-
-  # Validate input: Check if the data is numeric
-  if (!is.numeric(data) && !(is.matrix(data) && is.numeric(data[1, ]))) {
+  # Validate input early: Ensure data is numeric (either vector or matrix)
+  if (!(is.numeric(data) || (is.matrix(data) && is.numeric(data[1, ])))) {
     stop("Data must be either a numeric vector (1D) or a numeric matrix (2D).")
   }
 
-  # Automatically set noise_threshold based on the data, if not provided
+  # Handle empty input with a message
+  if (length(data) == 0) {
+    message("Warning: No data provided. Returning empty peak results.")
+    return(as.peak(positions = numeric(0), heights = numeric(0)))
+  }
+
+  # Automatically set noise_threshold if not provided
   if (is.null(noise_threshold)) {
-    noise_threshold <- 0.1 * sd(data)  # Set noise threshold to 10% of standard deviation
+    noise_threshold <- 0.1 * sd(data, na.rm = TRUE)  # Handle numeric data safely
   }
 
   if (is.vector(data) && is.numeric(data)) {
     # Handle 1D data
-    peaks <- pracma::findpeaks(data,
-                               minpeakheight = noise_threshold,
-                               minpeakdistance = min_distance)
+    peaks <- pracma::findpeaks(data, minpeakheight = noise_threshold, minpeakdistance = min_distance, sortstr = TRUE)
 
     if (is.null(peaks)) {
       return(as.peak(positions = numeric(0), heights = numeric(0)))
@@ -34,15 +37,12 @@ detect_peaks <- function(data, noise_threshold = NULL, min_distance = 1) {
 
     positions <- peaks[, 2]
     heights <- peaks[, 1]
-
     return(as.peak(positions = positions, heights = heights))
 
   } else if (is.matrix(data)) {
     # Handle 2D data row-wise
     detect_single_peaks <- function(row_data) {
-      peaks <- pracma::findpeaks(row_data,
-                                 minpeakheight = noise_threshold,
-                                 minpeakdistance = min_distance)
+      peaks <- pracma::findpeaks(row_data, minpeakheight = noise_threshold, minpeakdistance = min_distance, sortstr = TRUE)
       if (is.null(peaks)) {
         return(as.peak(positions = numeric(0), heights = numeric(0)))
       }
